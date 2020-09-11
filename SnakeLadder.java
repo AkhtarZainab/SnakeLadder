@@ -1,20 +1,22 @@
 public class SnakeLadder{
-	public static int rollDie(){				//method to get random value for die
+	
+	public static int rollDie(){
 		
 		int dieValue = (int)(Math.random()*6 + 1);
-		System.out.println("The die value is " +dieValue);
+		System.out.println( "The die value is " + dieValue);
 		return dieValue;
 	}
+	
 	public static int optionValue(){
 		int optionValue = (int)(Math.random()*3 + 1);
 		return optionValue;
-	}
-	public static void playTurn(){
+	}	
 
+	public static int playTurn(int playerPos){
+	
 		int dieValue = rollDie();
 		int optionValue = optionValue();
-		int playerPos = 0;
-
+		
 		switch(optionValue){
 			case 1:
 				System.out.println("No Play");
@@ -24,6 +26,7 @@ public class SnakeLadder{
 				playerPos = playerPos + dieValue;
 				break;
 			case 3:
+				
 				if (playerPos < dieValue) {
 					System.out.println("Snake, but stops at starting position");
 					playerPos = 0;
@@ -35,9 +38,22 @@ public class SnakeLadder{
 		}
       
 		System.out.println("Player position: " +playerPos);
-   	}
-		
+   		return playerPos;
+	}
+
+	public static void playGame(){
+		int playerPos = 0;
+		while (playerPos < 100) {
+			
+			System.out.println("-------------------------------");
+			playerPos = playTurn(playerPos);
+			
+				
+		}
+				
+	}
+	
 	public static void main(String[] args){
-		playTurn();
+		playGame();
 	}
 }
