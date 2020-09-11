@@ -41,19 +41,21 @@ public class SnakeLadder{
 				
 		}
       
-		System.out.println("Player position: " +playerPos);
-   		return playerPos;
+		return playerPos;
 	}
 
 	public static void playGame(){
 		int playerPos = 0;
+		int roundCount = 0;
+	
 		while (playerPos < 100) {
-			
+			roundCount = roundCount + 1;
 			System.out.println("-------------------------------");
 			playerPos = playTurn(playerPos);
-			
+			System.out.println("Player position after roll " + roundCount + " : " +playerPos);
 				
 		}
+		System.out.println("Total no. of times the dice was played : " + roundCount);
 				
 	}
 	
@@ -61,3 +63,4 @@ public class SnakeLadder{
 		playGame();
 	}
 }
+
