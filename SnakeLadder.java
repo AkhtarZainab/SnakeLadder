@@ -1,9 +1,10 @@
 public class SnakeLadder{
-	public static void setPlayerPos(){
-		int playerPos = 0;
-		System.out.println("Starting position of Player 1 is " +playerPos);
+	public static void rollDie(){
+		
+		int dieValue = (int)(Math.random()*6 + 1);
+		System.out.println("The die value is " +dieValue);
 	}
 	public static void main(String[] args){
-		setPlayerPos();
+		rollDie();
 	}
 }
