@@ -22,8 +22,12 @@ public class SnakeLadder{
 				System.out.println("No Play");
 				break;
 			case 2:
-				System.out.println("Ladder, so moving ahead by die value " + dieValue);
-				playerPos = playerPos + dieValue;
+				if ((playerPos + dieValue) > 100){
+					System.out.println("Sorry, you must reach exactly 100 or lower position with the die roll") ;
+				} else {
+					System.out.println("Ladder, so moving ahead by die value " + dieValue);
+					playerPos = playerPos + dieValue;
+				}
 				break;
 			case 3:
 				
