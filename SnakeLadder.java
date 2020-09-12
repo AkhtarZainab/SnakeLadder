@@ -1,19 +1,26 @@
 public class SnakeLadder{
-	
-	public static int rollDie(){
+   
+	public static int STARTPOS = 0;
+	public static int ENDPOS = 100;
+	public static int DIEMIN = 1;
+	public static int DIEMAX = 6;
+	public static int OPTIONMIN = 1;
+	public static int OPTIONMAX = 3;
 		
-		int dieValue = (int)(Math.random()*6 + 1);
-		System.out.println( "The die value is " + dieValue);
+	public int rollDie(){
+		int dieValue;
+		dieValue = (int)(Math.random() * (DIEMAX - DIEMIN + 1) + 1);
 		return dieValue;
 	}
-	
-	public static int optionValue(){
-		int optionValue = (int)(Math.random()*3 + 1);
-		return optionValue;
-	}	
 
-	public static int playTurn(int playerPos){
+	public int optionValue(){
+		int optionValue;
+		optionValue = (int)(Math.random()*(OPTIONMAX - OPTIONMIN + 1) + 1);		
+		return optionValue;
+	}
 	
+	public int playTurn(int player, int playerPos){
+		
 		int dieValue = rollDie();
 		int optionValue = optionValue();
 		
@@ -25,42 +32,61 @@ public class SnakeLadder{
 				if ((playerPos + dieValue) > 100){
 					System.out.println("Sorry, you must reach exactly 100 or lower position with the die roll") ;
 				} else {
-					System.out.println("Ladder, so moving ahead by die value " + dieValue);
 					playerPos = playerPos + dieValue;
+					System.out.println("Ladder, so moving ahead by die value " + dieValue);
 				}
 				break;
 			case 3:
-				
+				System.out.println("Snake, moving backward by die value " +dieValue);
 				if (playerPos < dieValue) {
-					System.out.println("Snake, but stops at starting position");
 					playerPos = 0;
 				} else {
-					System.out.println("Snake, moving backward by die value " +dieValue);
 					playerPos = playerPos - dieValue;
 				}
-				
 		}
       
-		return playerPos;
-	}
+		System.out.println("Player " +player + " position: " +playerPos);
+   	return playerPos;
+	}		
 
-	public static void playGame(){
-		int playerPos = 0;
+	public void playGame(){
+		int playerPos1 = STARTPOS;
+		int playerPos2 = STARTPOS;
 		int roundCount = 0;
-	
-		while (playerPos < 100) {
+		String winner;
+		
+		while (playerPos1 < ENDPOS && playerPos2 < ENDPOS) {
+			
+			//countRoll = countRoll + 1;
 			roundCount = roundCount + 1;
 			System.out.println("-------------------------------");
-			playerPos = playTurn(playerPos);
-			System.out.println("Player position after roll " + roundCount + " : " +playerPos);
+			System.out.println("Round " +roundCount+" begins!"); 
+			playerPos1 = playTurn(1, playerPos1);
+			if (playerPos1 != ENDPOS) {
+				playerPos2 = playTurn(2, playerPos2);
+			}
 				
 		}
-		System.out.println("Total no. of times the dice was played : " + roundCount);
-				
+		System.out.println("----------------------------------");
+		System.out.println("Total no. of rounds is: " +roundCount);
+		if (playerPos1 == ENDPOS) {
+			winner = "Player 1";
+		} else {
+			winner = "Player 2";
+		}
+		System.out.println("And the winner is: " + winner);
+		
 	}
-	
+
+
+
 	public static void main(String[] args){
-		playGame();
+		
+		SnakeLadder s = new SnakeLadder();
+		s.playGame();
+      
+		
 	}
+
 }
 
